@@ -12,6 +12,3 @@ buildNumber.properties
 .mvn/timing.properties
 Database.trace.db
 Database.mv.db
-/apache-tomcat-9.0.98
-docker/mysql-data
-.DS_Store
