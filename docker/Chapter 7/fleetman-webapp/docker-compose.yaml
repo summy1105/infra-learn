@@ -1,23 +1,23 @@
 version: "3"
-
+# 처음 시작할때는 경합으로 webapp이 실행되지 않지만, 2번째 docker compose up 으로는 데이터베이스 컨테이너가 있는상태에서 바로 실행되기 때문에 문제되지 않는다.
 services:
+  fleetman-webapp:
+    image: fleetman-webapp:0.0.1-SNAPSHOT
+    networks:
+      - fleetman-network
+    ports:
+      - 80:8080
+    depends_on:
+      - database
 
-   fleetman-webapp:
-      image: virtualpairprogrammers/fleetman-production
-      networks:
-         - fleetman-network
-      ports:
-         - 80:8080
-      depends_on: 
-         - database
-
-   database:
-      image: mysql:5
-      networks:
-         - fleetman-network
-      environment:
-         - MYSQL_ROOT_PASSWORD=password
-         - MYSQL_DATABASE=fleetman
+  database:
+    image: mysql:8.4.3
+    container_name: database
+    networks:
+      - fleetman-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=fleetman
 
 networks:
-   fleetman-network:
+  fleetman-network:
